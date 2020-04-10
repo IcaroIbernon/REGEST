@@ -8,35 +8,40 @@ using UnityEngine.SceneManagement;
 
 public class N4 : MonoBehaviour
 {
-    public bool con;
-    public string pattern;
+    private bool con;
+    private string pattern;
     public GameObject inputField; 
-    public GameObject textDisplay;
+    public GameObject textHist;
+    public Button btnNext;
+    private List<string> historico = new List<string>();
 
-    public void Main()
-    {
-    
-    List<string> names = new List<string>()
-    {
-    "abc", "123", "12a", "13464", "a13"
-    };
-    List<string> correto = new List<string>()
-    {
-    "123", "13464"
-    };
-    List<string> resposta = new List<string>();
-    pattern = inputField.GetComponent<Text>().text;
-    foreach (string name in names)
-    {
-        if (Regex.IsMatch(name, pattern)){
-        resposta.Add(name);
+    public void Main(){
+        List<string> names = new List<string>(){"abc", "123", "12a", "13464", "a13"};
+        List<string> correto = new List<string>(){"123", "13464"};
+        List<string> resposta = new List<string>();
+        
+        pattern = inputField.GetComponent<Text>().text;
+
+        historico.Add(pattern);
+
+        foreach (string hist in historico){
+            textHist.GetComponent<Text>().text = hist;
         }
-    }
-    con = resposta.SequenceEqual(correto);
-    textDisplay.GetComponent<Text>().text = con.ToString();
-    if (con == true){
-        SceneManager.LoadScene("Nivel5");
-        //SceneManager.SetActiveScene(SceneManager.GetSceneByName("Nivel2"));
-    }
+
+        foreach (string name in names){
+            if (Regex.IsMatch(name, pattern)){
+                resposta.Add(name);
+            }
+        }
+
+        con = resposta.SequenceEqual(correto);
+        
+        if(con == false){
+            textHist.GetComponent<Text>().color = Color.red;
+            btnNext.interactable = false;
+        }else{
+            textHist.GetComponent<Text>().color = Color.green;
+            btnNext.interactable = true;
+        }
     }
 }
