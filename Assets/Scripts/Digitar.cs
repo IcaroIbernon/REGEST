@@ -6,10 +6,9 @@ using System;
 
 public class Digitar : MonoBehaviour
 {
-    public Button btnNext;
     public Text text;
     public bool playOnAwake = true;
-    public float delayToStart;
+    public float delayToStart = 0f;
     public float delayBetweenChars = 0.125f;
     public float delayAfterPunctuation = 0.5f;
 
@@ -31,16 +30,15 @@ public class Digitar : MonoBehaviour
         {
             ChangeText(text.text, delayToStart);
         }
-     }
+    }
 
     //Update text and start typewriter effect
-    public void ChangeText(string textContent, float delayBetweenChars = 0f)
+    public void ChangeText(string textContent, float delayBetweenChars)
     {
         StopCoroutine(PlayText()); //stop Coroutime if exist
         story = textContent;
         text.text = ""; //clean text
         Invoke("Start_PlayText", delayBetweenChars); //Invoke effect
-        btnNext.interactable = true;
     }
 
     void Start_PlayText()
@@ -60,7 +58,7 @@ public class Digitar : MonoBehaviour
                 yield return new WaitForSeconds(delayBetweenChars = delayAfterPunctuation);
                 lastCharPunctuation = false;
             }
-         
+
             if (c == charComma || c == charPeriod)
             {
                 lastCharPunctuation = true;
