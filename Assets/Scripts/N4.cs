@@ -16,8 +16,8 @@ public class N4 : MonoBehaviour
     private List<string> historico = new List<string>();
 
     public void Main(){
-        List<string> names = new List<string>(){"abc", "123", "12a", "13464", "a13"};
-        List<string> correto = new List<string>(){"123", "13464"};
+        List<string> names = new List<string>(){"Alb.", "11al", "Alvaro", "Jorge.", "Ali2", "Alvin.23"};
+        List<string> correto = new List<string>(){"Alb.", "Jorge."};
         List<string> resposta = new List<string>();
         
         pattern = inputField.GetComponent<Text>().text;
