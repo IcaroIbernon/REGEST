@@ -8,11 +8,13 @@ using UnityEngine.SceneManagement;
 
 public class Comum : MonoBehaviour
 {
-    public void NextLevel(string level){
+    public void NextLevel(string level)
+    {
         SceneManager.LoadScene(level);
     }
 
-    public void Quit(){
+    public void Quit()
+    {
         Application.Quit();
     }
 }
